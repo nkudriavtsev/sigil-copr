@@ -1,0 +1,42 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1432602..ca12934 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -130,4 +130,8 @@ if( NOT FLIGHTCREW_FOUND )
+     set( FLIGHTCREW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src/FlightCrew )
+ endif()
+ 
++if( HUNSPELL_DICTS_PATH )
++    add_definitions( -DHUNSPELL_DICTS_PATH=\"${HUNSPELL_DICTS_PATH}\" )
++endif()
++
+ add_subdirectory( src/Sigil )
+diff --git a/src/Sigil/CMakeLists.txt b/src/Sigil/CMakeLists.txt
+index 5fac4b0..dd38aca 100644
+--- a/src/Sigil/CMakeLists.txt
++++ b/src/Sigil/CMakeLists.txt
+@@ -855,7 +855,9 @@ if( UNIX AND NOT APPLE )
+     install( FILES ${LINUX_DESKTOP_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications )
+     install( FILES ${LINUX_DESKTOP_ICON_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/pixmaps RENAME sigil.png )
+     install( FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/translations )
++if( NOT DEFINED HUNSPELL_DICTS_PATH )
+     install( FILES ${DIC_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/hunspell_dictionaries )
++endif()
+     install( FILES ${EXAMPLE_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/examples )
+ endif()
+ 
+diff --git a/src/Sigil/Misc/SpellCheck.cpp b/src/Sigil/Misc/SpellCheck.cpp
+index acfc00c..2739fbc 100644
+--- a/src/Sigil/Misc/SpellCheck.cpp
++++ b/src/Sigil/Misc/SpellCheck.cpp
+@@ -278,6 +278,10 @@ void SpellCheck::loadDictionaryNames()
+     if (!env_dic_location.isEmpty()) {
+         paths << env_dic_location;
+     }
++#ifdef HUNSPELL_DICTS_PATH
++    // use system provided dictionaries
++    paths << HUNSPELL_DICTS_PATH;
++#endif
+     // Possible location if the user installed from source.
+     // This really should be changed to be passed the install prefix given to
+     // cmake instead of guessing based upon the executable path.
