@@ -1,6 +1,6 @@
 Name:           sigil
-Version:        0.6.0
-Release:        3%{?dist}
+Version:        0.6.2
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -8,7 +8,7 @@ License:        GPLv3+
 URL:            http://code.google.com/p/sigil/
 Source0:        http://sigil.googlecode.com/files/Sigil-%{version}-Code.zip
 # use system spelling dictionaries
-Patch1:         %{name}-0.5.906-system-dicts.patch
+Patch1:         %{name}-0.6.2-system-dicts.patch
 
 BuildRequires:  cmake
 BuildRequires:  qt4-devel
@@ -103,6 +103,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Tue Dec 18 2012 Dan Horák <dan[at]danny.cz> - 0.6.2-1
+- New upstream release 0.6.2
+
 * Sun Nov 25 2012 Hans de Goede <hdegoede@redhat.com> - 0.6.0-3
 - Add Provides: bundled(libtidy)  (rhbz#772362)
 

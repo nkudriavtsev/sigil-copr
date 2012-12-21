@@ -1,5 +1,16 @@
+From 44bde8bd7b700b1dc776fa688a0acbcce0f302b0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Dan=20Hor=C3=A1k?= <dan@danny.cz>
+Date: Sat, 6 Oct 2012 16:59:25 +0200
+Subject: [PATCH] system spell checker dicts - 1
+
+---
+ CMakeLists.txt                |    4 ++++
+ src/Sigil/CMakeLists.txt      |    2 ++
+ src/Sigil/Misc/SpellCheck.cpp |    5 +++++
+ 3 files changed, 11 insertions(+), 0 deletions(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1432602..ca12934 100644
+index da52434..26ebe0e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -130,4 +130,8 @@ if( NOT FLIGHTCREW_FOUND )
@@ -12,10 +23,10 @@ index 1432602..ca12934 100644
 +
  add_subdirectory( src/Sigil )
 diff --git a/src/Sigil/CMakeLists.txt b/src/Sigil/CMakeLists.txt
-index 5fac4b0..dd38aca 100644
+index b01a9e1..eb89070 100644
 --- a/src/Sigil/CMakeLists.txt
 +++ b/src/Sigil/CMakeLists.txt
-@@ -855,7 +855,9 @@ if( UNIX AND NOT APPLE )
+@@ -871,7 +871,9 @@ if( UNIX AND NOT APPLE )
      install( FILES ${LINUX_DESKTOP_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications )
      install( FILES ${LINUX_DESKTOP_ICON_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/pixmaps RENAME sigil.png )
      install( FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/translations )
@@ -26,17 +37,21 @@ index 5fac4b0..dd38aca 100644
  endif()
  
 diff --git a/src/Sigil/Misc/SpellCheck.cpp b/src/Sigil/Misc/SpellCheck.cpp
-index acfc00c..2739fbc 100644
+index 000573e..22d48d3 100644
 --- a/src/Sigil/Misc/SpellCheck.cpp
 +++ b/src/Sigil/Misc/SpellCheck.cpp
-@@ -278,6 +278,10 @@ void SpellCheck::loadDictionaryNames()
-     if (!env_dic_location.isEmpty()) {
+@@ -298,6 +298,11 @@ void SpellCheck::loadDictionaryNames()
          paths << env_dic_location;
      }
+ 
 +#ifdef HUNSPELL_DICTS_PATH
 +    // use system provided dictionaries
 +    paths << HUNSPELL_DICTS_PATH;
 +#endif
++
      // Possible location if the user installed from source.
      // This really should be changed to be passed the install prefix given to
      // cmake instead of guessing based upon the executable path.
+-- 
+1.7.7.6
+
