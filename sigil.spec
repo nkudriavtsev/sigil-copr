@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.6.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -103,6 +103,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Sat Feb 09 2013 Denis Arnaud <denis.arnaud_fedora@m4x.org> - 0.6.2-2
+- Rebuild for Boost-1.53.0
+
 * Tue Dec 18 2012 Dan Horák <dan[at]danny.cz> - 0.6.2-1
 - New upstream release 0.6.2
 
