@@ -1,5 +1,5 @@
 Name:           sigil
-Version:        0.7.3
+Version:        0.7.4
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 
@@ -82,9 +82,6 @@ mkdir build
 cd build
 %{cmake} -DBUILD_SHARED_LIBS:BOOL=OFF -DHUNSPELL_DICTS_PATH=%{_datadir}/myspell ..
 
-# fix lrelease path (qt5-qttools bug #1006254)
-sed -i 's|%{_libdir}/cmake/Qt5LinguistTools/bin/lrelease|%{_libdir}/qt5/bin/lrelease|g' ./src/Sigil/CMakeFiles/sigil.dir/build.make
-
 make %{?_smp_mflags}
 
 
@@ -110,6 +107,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Mon Oct 28 2013 Dan Horák <dan[at]danny.cz> - 0.7.4-1
+- New upstream release 0.7.4 (#1023931)
+
 * Wed Sep 11 2013 Dan Horák <dan[at]danny.cz> - 0.7.3-1
 - New upstream release 0.7.3 (#907398)
 
