@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.7.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -107,6 +107,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Mon Nov 11 2013 Rex Dieter <rdieter@fedoraproject.org> 0.7.4-2
+- rebuild (qt5 qreal/arm)
+
 * Mon Oct 28 2013 Dan Horák <dan[at]danny.cz> - 0.7.4-1
 - New upstream release 0.7.4 (#1023931)
 
