@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.7.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -21,9 +21,7 @@ BuildRequires:  zlib-devel
 BuildRequires:  FlightCrew-devel
 BuildRequires:  xerces-c-devel >= 3.1
 BuildRequires:  hunspell-devel
-%if 0%{?fedora} >= 18
 BuildRequires:  pcre-devel >= 8.31
-%endif
 BuildRequires:  minizip-devel
 BuildRequires:  desktop-file-utils
 Provides:       bundled(libtidy)
@@ -67,12 +65,6 @@ for i in src/*; do
     if [ "$i" = "src/tidyLib" ]; then
         continue
     fi
-%if 0%{?fedora} < 18
-    # pcre >= 8.31 is required for UTF-16 support
-    if [ "$i" = "src/pcre" ]; then
-        continue
-    fi
-%endif
     rm -r "$i"
 done
 
@@ -107,6 +99,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Sun Apr 20 2014 Dan Horák <dan[at]danny.cz> - 0.7.4-3
+- dropping old conditionals will allow build on EL-7
+
 * Mon Nov 11 2013 Rex Dieter <rdieter@fedoraproject.org> 0.7.4-2
 - rebuild (qt5 qreal/arm)
 
