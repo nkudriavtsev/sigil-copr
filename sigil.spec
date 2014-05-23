@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.7.4
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -99,6 +99,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Sat May 24 2014 Petr Machata <pmachata@redhat.com> - 0.7.4-5
+- Rebuild for boost 1.55.0
+
 * Fri May 23 2014 David Tardon <dtardon@redhat.com> - 0.7.4-4
 - rebuild for boost 1.55.0
 
