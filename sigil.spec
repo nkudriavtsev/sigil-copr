@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.7.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -99,6 +99,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Fri May 23 2014 David Tardon <dtardon@redhat.com> - 0.7.4-4
+- rebuild for boost 1.55.0
+
 * Sun Apr 20 2014 Dan Horák <dan[at]danny.cz> - 0.7.4-3
 - dropping old conditionals will allow build on EL-7
 
