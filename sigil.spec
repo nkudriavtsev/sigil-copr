@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.7.4
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -99,6 +99,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Sun Jun 08 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.4-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Sat May 24 2014 Petr Machata <pmachata@redhat.com> - 0.7.4-5
 - Rebuild for boost 1.55.0
 
