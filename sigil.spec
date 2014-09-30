@@ -1,14 +1,16 @@
 Name:           sigil
-Version:        0.7.4
-Release:        7%{?dist}
+Version:        0.8.0
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
 License:        GPLv3+
 URL:            http://code.google.com/p/sigil/
-Source0:        http://sigil.googlecode.com/files/Sigil-%{version}-Code.zip
+Source0:        https://github.com/user-none/Sigil/releases/download/%{version}/Sigil-%{version}-Code.zip
 # use system spelling dictionaries
-Patch1:         %{name}-0.6.2-system-dicts.patch
+Patch1:         %{name}-0.8.0-system-dicts.patch
+# downgrade the requirement to 2.8
+Patch2:         %{name}-0.8.0-cmake28.patch
 
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel
@@ -54,6 +56,7 @@ Now what does it have to offer...
 %prep
 %setup -q -c
 %patch1 -p1 -b .system-dicts
+%patch2 -p1 -b .cmake28
 
 # remove unbundled stuff
 for i in src/*; do
@@ -99,6 +102,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Tue Sep 30 2014 Dan Horák <dan[at]danny.cz> - 0.8.0-1
+- New upstream release 0.8.0
+
 * Mon Aug 18 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.7.4-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 

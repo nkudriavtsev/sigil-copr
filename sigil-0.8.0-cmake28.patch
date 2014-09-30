@@ -1,0 +1,12 @@
+diff -up sigil-0.8.0/CMakeLists.txt.orig sigil-0.8.0/CMakeLists.txt
+--- sigil-0.8.0/CMakeLists.txt.orig	2014-09-30 11:38:41.000000000 +0200
++++ sigil-0.8.0/CMakeLists.txt	2014-09-30 11:35:09.000000000 +0200
+@@ -7,7 +7,7 @@
+ #
+ #########################################################
+ 
+-cmake_minimum_required( VERSION 3.0 ) 
++cmake_minimum_required( VERSION 2.8 ) 
+ 
+ project( Sigil ) 
+ 
