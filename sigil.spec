@@ -1,5 +1,5 @@
 Name:           sigil
-Version:        0.8.0
+Version:        0.8.1
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 
@@ -52,9 +52,16 @@ Now what does it have to offer...
       changing views cleans the document so no matter how much you screw up
       your code, it will fix it (usually) 
 
+%package doc
+License:        CC-BY-SA
+Summary:        Documentation for Sigil ebook editor
+
+%description doc
+%{summary}.
+
 
 %prep
-%setup -q -c
+%setup -q -n Sigil-%{version}
 %patch1 -p1 -b .system-dicts
 %patch2 -p1 -b .cmake28
 
@@ -100,8 +107,15 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/pixmaps/%{name}.png
 
+%files doc
+%doc docs/*.epub
+
 
 %changelog
+* Sat Oct 18 2014 Dan Horák <dan[at]danny.cz> - 0.8.1-1
+- New upstream release 0.8.1
+- Add doc subpackage for user guide and plugin guide
+
 * Tue Sep 30 2014 Dan Horák <dan[at]danny.cz> - 0.8.0-1
 - New upstream release 0.8.0
 
