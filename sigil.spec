@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.8.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -112,6 +112,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Wed Jan 28 2015 Petr Machata <pmachata@redhat.com> - 0.8.1-2
+- Rebuild for boost 1.57.0
+
 * Sat Oct 18 2014 Dan Horák <dan[at]danny.cz> - 0.8.1-1
 - New upstream release 0.8.1
 - Add doc subpackage for user guide and plugin guide
