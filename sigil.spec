@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.8.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -112,6 +112,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Sat May 02 2015 Kalev Lember <kalevlember@gmail.com> - 0.8.1-3
+- Rebuilt for GCC 5 C++11 ABI change
+
 * Wed Jan 28 2015 Petr Machata <pmachata@redhat.com> - 0.8.1-2
 - Rebuild for boost 1.57.0
 
