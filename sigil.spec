@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.8.1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -112,6 +112,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Thu Aug 27 2015 Jonathan Wakely <jwakely@redhat.com> - 0.8.1-7
+- Rebuilt for Boost 1.59
+
 * Wed Jul 29 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.8.1-6
 - Rebuilt for https://fedoraproject.org/wiki/Changes/F23Boost159
 
