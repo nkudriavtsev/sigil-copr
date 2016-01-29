@@ -1,0 +1,64 @@
+--- Sigil-0.8.1/src/Sigil/SourceUpdates/UniversalUpdates.cpp.orig	2016-01-29 01:29:15.400283672 +0000
++++ Sigil-0.8.1/src/Sigil/SourceUpdates/UniversalUpdates.cpp	2016-01-29 01:29:35.750337076 +0000
+@@ -50,6 +50,7 @@
+ using boost::shared_ptr;
+ using boost::tie;
+ using boost::tuple;
++using boost::placeholders::_1;
+ 
+ #define NON_WELL_FORMED_MESSAGE "Cannot perform HTML updates since the file is not well formed"
+ 
+--- Sigil-0.8.1/src/Sigil/SourceUpdates/WordUpdates.cpp.orig	2016-01-29 01:41:36.661228946 +0000
++++ Sigil-0.8.1/src/Sigil/SourceUpdates/WordUpdates.cpp	2016-01-29 01:41:39.820237236 +0000
+@@ -31,7 +31,7 @@
+ 
+ void WordUpdates::UpdateWordInAllFiles(const QList<HTMLResource *> &html_resources, const QString old_word, QString new_word)
+ {
+-    QtConcurrent::blockingMap(html_resources, boost::bind(UpdateWordsInOneFile, _1, old_word, new_word));
++    QtConcurrent::blockingMap(html_resources, boost::bind(UpdateWordsInOneFile, boost::placeholders::_1, old_word, new_word));
+ }
+ 
+ void WordUpdates::UpdateWordsInOneFile(HTMLResource *html_resource, QString old_word, QString new_word)
+--- Sigil-0.8.1/src/Sigil/SourceUpdates/LinkUpdates.cpp.orig	2016-01-29 01:44:02.492611648 +0000
++++ Sigil-0.8.1/src/Sigil/SourceUpdates/LinkUpdates.cpp	2016-01-29 01:44:05.012618262 +0000
+@@ -40,7 +40,7 @@
+ 
+ void LinkUpdates::UpdateLinksInAllFiles(const QList<HTMLResource *> &html_resources, const QList<QString> new_stylesheets)
+ {
+-    QtConcurrent::blockingMap(html_resources, boost::bind(UpdateLinksInOneFile, _1, new_stylesheets));
++    QtConcurrent::blockingMap(html_resources, boost::bind(UpdateLinksInOneFile, boost::placeholders::_1, new_stylesheets));
+ }
+ 
+ void LinkUpdates::UpdateLinksInOneFile(HTMLResource *html_resource, QList<QString> new_stylesheets)
+--- Sigil-0.8.1/src/Sigil/SourceUpdates/AnchorUpdates.cpp.orig	2016-01-29 01:44:31.252687123 +0000
++++ Sigil-0.8.1/src/Sigil/SourceUpdates/AnchorUpdates.cpp	2016-01-29 01:44:33.324692560 +0000
+@@ -40,6 +40,7 @@
+ using boost::shared_ptr;
+ using boost::tie;
+ using boost::tuple;
++using boost::placeholders::_1;
+ 
+ void AnchorUpdates::UpdateAllAnchorsWithIDs(const QList<HTMLResource *> &html_resources)
+ {
+--- Sigil-0.8.1/src/Sigil/BookManipulation/Headings.cpp.orig	2016-01-29 02:03:20.535650675 +0000
++++ Sigil-0.8.1/src/Sigil/BookManipulation/Headings.cpp	2016-01-29 02:03:41.934706832 +0000
+@@ -57,7 +57,7 @@
+     QList<Headings::Heading> heading_list;
+     QList<QList<Headings::Heading>> per_file_headings =
+                                      QtConcurrent::blockingMapped(html_resources,
+-                                             boost::bind(GetHeadingListForOneFile, _1, include_unwanted_headings));
++                                             boost::bind(GetHeadingListForOneFile, boost::placeholders::_1, include_unwanted_headings));
+ 
+     for (int i = 0; i < per_file_headings.count(); ++i) {
+         heading_list.append(per_file_headings.at(i));
+--- Sigil-0.8.1/src/Sigil/Importers/ImportHTML.cpp.orig	2016-01-29 02:14:24.539421937 +0000
++++ Sigil-0.8.1/src/Sigil/Importers/ImportHTML.cpp	2016-01-29 02:14:31.037440343 +0000
+@@ -160,7 +160,7 @@
+ 
+     QFutureSynchronizer<void> sync;
+     sync.addFuture(QtConcurrent::map(css_resources,
+-                                     boost::bind(UniversalUpdates::LoadAndUpdateOneCSSFile, _1, css_updates)));
++                                     boost::bind(UniversalUpdates::LoadAndUpdateOneCSSFile, boost::placeholders::_1, css_updates)));
+     html_resource.SetText(XhtmlDoc::GetDomDocumentAsString(*PerformHTMLUpdates(document, html_updates, css_updates)().get()));
+     sync.waitForFinished();
+ }

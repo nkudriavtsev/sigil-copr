@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.8.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        WYSIWYG ebook editor
 
 Group:          Applications/Productivity
@@ -11,6 +11,8 @@ Source0:        https://github.com/user-none/Sigil/releases/download/%{version}/
 Patch1:         %{name}-0.8.0-system-dicts.patch
 # downgrade the requirement to 2.8
 Patch2:         %{name}-0.8.0-cmake28.patch
+# Boost 1.60 moved the Boost.Bind placeholders to a different namespace.
+Patch3:         %{name}-0.8.1-boost160.patch
 
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel
@@ -64,6 +66,7 @@ Summary:        Documentation for Sigil ebook editor
 %setup -q -n Sigil-%{version}
 %patch1 -p1 -b .system-dicts
 %patch2 -p1 -b .cmake28
+%patch3 -p1 -b .boost160
 
 # remove unbundled stuff
 for i in src/*; do
@@ -112,6 +115,9 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 
 
 %changelog
+* Fri Jan 29 2016 Jonathan Wakely <jwakely@redhat.com> 0.8.1-8
+- Patched and rebuilt for Boost 1.60
+
 * Thu Aug 27 2015 Jonathan Wakely <jwakely@redhat.com> - 0.8.1-7
 - Rebuilt for Boost 1.59
 
