@@ -20,6 +20,7 @@ BuildRequires:  xerces-c-devel >= 3.1
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
 BuildRequires:  minizip-devel
+BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
 # For the plugins
 Requires:       python3-pillow python3-cssselect python3-html5lib python3-lxml
