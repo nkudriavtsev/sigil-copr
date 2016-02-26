@@ -1,57 +1,23 @@
-From 860ea99396b2cf487cd7498e9e1a67d18b189245 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Dan=20Hor=C3=A1k?= <dan@danny.cz>
-Date: Sat, 6 Oct 2012 16:59:25 +0200
-Subject: [PATCH] system spell checker dicts - 1
-
----
- CMakeLists.txt                | 4 ++++
- src/Sigil/CMakeLists.txt      | 2 ++
- src/Sigil/Misc/SpellCheck.cpp | 5 +++++
- 3 files changed, 11 insertions(+)
-
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 21f9bd9..8ab19aa 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -131,4 +131,8 @@ if( NOT FLIGHTCREW_FOUND )
-     set( FLIGHTCREW_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/src/FlightCrew )
- endif()
+diff -up sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install~ sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install
+--- sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install~	2016-01-24 17:32:06.000000000 +0100
++++ sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install	2016-02-24 17:10:47.396203369 +0100
+@@ -1,5 +1,7 @@
+ #!/bin/sh
  
-+if( HUNSPELL_DICTS_PATH )
-+    add_definitions( -DHUNSPELL_DICTS_PATH=\"${HUNSPELL_DICTS_PATH}\" )
-+endif()
++export SIGIL_DICTIONARIES=/usr/share/myspell
 +
- add_subdirectory( src/Sigil )
-diff --git a/src/Sigil/CMakeLists.txt b/src/Sigil/CMakeLists.txt
-index 0823d4c..294df1f 100644
---- a/src/Sigil/CMakeLists.txt
-+++ b/src/Sigil/CMakeLists.txt
-@@ -883,7 +883,9 @@ if( UNIX AND NOT APPLE )
-     install( FILES ${LINUX_DESKTOP_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/applications/ )
-     install( FILES ${LINUX_DESKTOP_ICON_FILE} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/pixmaps RENAME sigil.png )
-     install( FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/translations/ )
-+if( NOT DEFINED HUNSPELL_DICTS_PATH )
-     install( FILES ${DIC_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/hunspell_dictionaries/ )
-+endif()
-     install( FILES ${PLUGIN_FILES_PYTHON} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/plugin_launchers/python/ )
-     install( FILES ${EXAMPLE_FILES} DESTINATION ${CMAKE_INSTALL_PREFIX}/share/sigil/examples/ )
- endif()
-diff --git a/src/Sigil/Misc/SpellCheck.cpp b/src/Sigil/Misc/SpellCheck.cpp
-index 1df6c40..319c709 100644
---- a/src/Sigil/Misc/SpellCheck.cpp
-+++ b/src/Sigil/Misc/SpellCheck.cpp
-@@ -324,6 +324,11 @@ void SpellCheck::loadDictionaryNames()
-         paths << env_dic_location;
-     }
+ # Entry point for Sigil on Unix systems.
+ # Adds linked Qt's lib directory to the LD_LIBRARY_PATH
  
-+#ifdef HUNSPELL_DICTS_PATH
-+    // use system provided dictionaries
-+    paths << HUNSPELL_DICTS_PATH;
-+#endif
-+
-     // Possible location if the user installed from source.
-     // This really should be changed to be passed the install prefix given to
-     // cmake instead of guessing based upon the executable path.
--- 
-1.9.3
-
+diff -up sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py~ sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py
+--- sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py~	2016-01-24 17:32:06.000000000 +0100
++++ sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py	2016-02-25 19:22:56.665201249 +0100
+@@ -40,7 +40,7 @@ class HunspellChecker(object):
+             # No bundled (or incompatible bundled) libhunspell found.
+             # found. So search for system libhunspell.
+             self.hunspell = None
+-            sys_hunspell_location = find_library('hunspell')
++            sys_hunspell_location = find_library('hunspell-1.3')
+         if sys_hunspell_location is not None:
+             try:
+                 self.hunspell = cdll.LoadLibrary(sys_hunspell_location)

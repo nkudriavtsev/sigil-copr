@@ -1,19 +1,13 @@
 Name:           sigil
-Version:        0.8.1
-Release:        9%{?dist}
+Version:        0.9.3
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
-
-Group:          Applications/Productivity
 License:        GPLv3+
-URL:            http://code.google.com/p/sigil/
-Source0:        https://github.com/user-none/Sigil/releases/download/%{version}/Sigil-%{version}-Code.zip
-# use system spelling dictionaries
+URL:            https://sigil-ebook.com/
+Source0:        https://github.com/Sigil-Ebook/Sigil/releases/download/%{version}/Sigil-%{version}-Code.zip
+Source1:        %{name}.appdata.xml
 Patch1:         %{name}-0.8.0-system-dicts.patch
-# downgrade the requirement to 2.8
-Patch2:         %{name}-0.8.0-cmake28.patch
-# Boost 1.60 moved the Boost.Bind placeholders to a different namespace.
-Patch3:         %{name}-0.8.1-boost160.patch
-
+Patch2:         %{name}-0.9.3-global-plugin-support.patch
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtwebkit-devel
@@ -22,13 +16,18 @@ BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-qtxmlpatterns-devel
 BuildRequires:  boost-devel
 BuildRequires:  zlib-devel
-BuildRequires:  FlightCrew-devel
 BuildRequires:  xerces-c-devel >= 3.1
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
 BuildRequires:  minizip-devel
-BuildRequires:  desktop-file-utils
-Provides:       bundled(libtidy)
+BuildRequires:  desktop-file-utils libappstream-glib
+# For the plugins
+Requires:       python3-pillow python3-cssselect python3-html5lib python3-lxml
+Requires:       python3-regex python3-chardet python3-six
+Requires:       hicolor-icon-theme
+Recommends:     FlightCrew-sigil-plugin
+# See internal/about.md for rationale for this
+Provides:       bundled(gumbo)
 
 %description
 Sigil is a multi-platform WYSIWYG ebook editor. It is designed to edit books
@@ -54,67 +53,96 @@ Now what does it have to offer...
       changing views cleans the document so no matter how much you screw up
       your code, it will fix it (usually) 
 
+
 %package doc
 License:        CC-BY-SA
 Summary:        Documentation for Sigil ebook editor
+BuildArch:      noarch
 
 %description doc
 %{summary}.
 
 
 %prep
-%setup -q -n Sigil-%{version}
-%patch1 -p1 -b .system-dicts
-%patch2 -p1 -b .cmake28
-%patch3 -p1 -b .boost160
-
-# remove unbundled stuff
-for i in src/*; do
-    # lets not remove Sigil itself ...
-    if [ "$i" = "src/Sigil" ]; then
-        continue
-    fi
-    # tidyLib is modified to deal with epub, so stick with the bundled copy
-    if [ "$i" = "src/tidyLib" ]; then
-        continue
-    fi
-    rm -r "$i"
-done
+%setup -q -c
+%patch1 -p1
+%patch2 -p1
+sed -i 's|/lib/sigil|/%{_lib}/sigil|'      \
+  CMakeLists.txt src/CMakeLists.txt        \
+  src/Resource_Files/bash/sigil-sh_install
+# Cleanup sources a bit
+chmod -x src/Misc/PyObjectPtr.h
+sed -i 's/\r//' src/Misc/PyObjectPtr.h     \
+  src/Resource_Files/python3lib/opf_newparser.py
 
 
 %build
 mkdir build
-cd build
-%{cmake} -DBUILD_SHARED_LIBS:BOOL=OFF -DHUNSPELL_DICTS_PATH=%{_datadir}/myspell ..
-
+pushd build
+%{cmake} -DUSE_SYSTEM_LIBS=1 -DSYSTEM_LIBS_REQUIRED=1 \
+  -DINSTALL_BUNDLED_DICTS=0 -DSHARE_INSTALL_PREFIX:PATH=%{_prefix} ..
 make %{?_smp_mflags}
+popd
 
 
 %install
-cd build
-make install DESTDIR=$RPM_BUILD_ROOT
+pushd build
+%make_install
+popd
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/plugins
+# Make rpmlint happy
+chmod +x $RPM_BUILD_ROOT%{_datadir}/%{name}/python3lib/*.py
+chmod +x $RPM_BUILD_ROOT%{_datadir}/%{name}/plugin_launchers/python/*.py
+chmod -x $RPM_BUILD_ROOT%{_datadir}/%{name}/plugin_launchers/python/sigil_gumbo_bs4_adapter.py
+# desktop-file, icons and appdata
 desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
+rm $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}.png
+for i in 16 32 48 128 256 512; do
+  mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${i}x${i}/apps
+  install -p -m 644 src/Resource_Files/icon/app_icon_$i.png \
+    $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${i}x${i}/apps/%{name}.png
+done
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
+install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/appdata
+appstream-util validate-relax --nonet \
+  $RPM_BUILD_ROOT%{_datadir}/appdata/%{name}.appdata.xml
 
 
 %post
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 /usr/bin/update-desktop-database &> /dev/null || :
 
 %postun
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+fi
 /usr/bin/update-desktop-database &> /dev/null || :
+
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files
-%doc COPYING.txt ChangeLog.txt
+%doc ChangeLog.txt README.md
+%license COPYING.txt
 %{_bindir}/%{name}
+%{_libdir}/%{name}
 %{_datadir}/%{name}
+%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/pixmaps/%{name}.png
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
 
 %files doc
 %doc docs/*.epub
 
 
 %changelog
+* Wed Feb 24 2016 Hans de Goede <hdegoede@redhat.com> - 0.9.3-1
+- New upstream release 0.9.3 (rhbz#1219489)
+- Use high-res icons
+- Add appdata
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.8.1-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 

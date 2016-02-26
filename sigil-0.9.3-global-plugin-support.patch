@@ -1,0 +1,19 @@
+diff -up sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install~ sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install
+--- sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install~	2016-02-24 17:59:35.000000000 +0100
++++ sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install	2016-02-25 19:26:17.202297521 +0100
+@@ -2,6 +2,15 @@
+ 
+ export SIGIL_DICTIONARIES=/usr/share/myspell
+ 
++mkdir -p $HOME/.local/share/sigil-ebook/sigil/plugins
++pushd /usr/share/sigil/plugins > /dev/null
++for i in *; do
++  if [ -d "$i" ]; then
++    cp -pr "$i" $HOME/.local/share/sigil-ebook/sigil/plugins/
++  fi
++done
++popd > /dev/null
++
+ # Entry point for Sigil on Unix systems.
+ # Adds linked Qt's lib directory to the LD_LIBRARY_PATH
+ 
