@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.9.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -139,6 +139,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Apr 18 2016 Caolán McNamara <caolanm@redhat.com> - 0.9.3-2
+- rebuild for hunspell 1.4.0
+
 * Wed Feb 24 2016 Hans de Goede <hdegoede@redhat.com> - 0.9.3-1
 - New upstream release 0.9.3 (rhbz#1219489)
 - Use high-res icons
