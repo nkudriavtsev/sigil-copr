@@ -1,6 +1,6 @@
 Name:           sigil
-Version:        0.9.3
-Release:        2%{?dist}
+Version:        0.9.6
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -23,7 +23,8 @@ BuildRequires:  minizip-devel
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
 # For the plugins
-Requires:       python3-pillow python3-cssselect python3-html5lib python3-lxml
+Requires:       python3-pillow python3-cssselect python3-cssutils
+Requires:       python3-html5lib python3-lxml
 Requires:       python3-regex python3-chardet python3-six
 Requires:       hicolor-icon-theme
 Recommends:     FlightCrew-sigil-plugin
@@ -139,6 +140,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Aug 12 2016 Hans de Goede <hdegoede@redhat.com> - 0.9.6-1
+- New upstream release 0.9.6 (rhbz#1330501)
+
 * Mon Apr 18 2016 Caolán McNamara <caolanm@redhat.com> - 0.9.3-2
 - rebuild for hunspell 1.4.0
 
