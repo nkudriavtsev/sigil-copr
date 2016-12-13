@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.9.6
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -140,6 +140,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Dec 13 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 0.9.6-2
+- Rebuild for hunspell 1.5.x
+
 * Fri Aug 12 2016 Hans de Goede <hdegoede@redhat.com> - 0.9.6-1
 - New upstream release 0.9.6 (rhbz#1330501)
 
