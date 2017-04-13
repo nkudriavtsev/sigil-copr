@@ -9,15 +9,3 @@ diff -up sigil-0.9.3/src/Resource_Files/bash/sigil-sh_install~ sigil-0.9.3/src/R
  # Entry point for Sigil on Unix systems.
  # Adds linked Qt's lib directory to the LD_LIBRARY_PATH
  
-diff -up sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py~ sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py
---- sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py~	2016-01-24 17:32:06.000000000 +0100
-+++ sigil-0.9.3/src/Resource_Files/plugin_launchers/python/pluginhunspell.py	2016-02-25 19:22:56.665201249 +0100
-@@ -40,7 +40,7 @@ class HunspellChecker(object):
-             # No bundled (or incompatible bundled) libhunspell found.
-             # found. So search for system libhunspell.
-             self.hunspell = None
--            sys_hunspell_location = find_library('hunspell')
-+            sys_hunspell_location = find_library('hunspell-1.3')
-         if sys_hunspell_location is not None:
-             try:
-                 self.hunspell = cdll.LoadLibrary(sys_hunspell_location)

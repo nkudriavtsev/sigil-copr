@@ -1,6 +1,6 @@
 Name:           sigil
-Version:        0.9.6
-Release:        5%{?dist}
+Version:        0.9.8
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -8,23 +8,23 @@ Source0:        https://github.com/Sigil-Ebook/Sigil/releases/download/%{version
 Source1:        %{name}.appdata.xml
 Patch1:         %{name}-0.8.0-system-dicts.patch
 Patch2:         %{name}-0.9.3-global-plugin-support.patch
+Patch3:         %{name}-0.9.8-pluginrunner.patch
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtwebkit-devel
 BuildRequires:  qt5-qtsvg-devel
 BuildRequires:  qt5-qttools-devel
 BuildRequires:  qt5-qtxmlpatterns-devel
-BuildRequires:  boost-devel
 BuildRequires:  zlib-devel
-BuildRequires:  xerces-c-devel >= 3.1
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
 BuildRequires:  minizip-devel
+BuildRequires:  pkgconfig
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
 # For the plugins
 Requires:       python3-pillow python3-cssselect python3-cssutils
-Requires:       python3-html5lib python3-lxml
+Requires:       python3-html5lib python3-lxml python3-qt5
 Requires:       python3-regex python3-chardet python3-six
 Requires:       hicolor-icon-theme
 Recommends:     FlightCrew-sigil-plugin
@@ -69,14 +69,41 @@ BuildArch:      noarch
 %setup -q -c
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 sed -i 's|/lib/sigil|/%{_lib}/sigil|'      \
   CMakeLists.txt src/CMakeLists.txt        \
   src/Resource_Files/bash/sigil-sh_install
 # Cleanup sources a bit
-chmod -x src/Misc/PyObjectPtr.h
-sed -i 's/\r//' src/Misc/PyObjectPtr.h     \
-  src/Resource_Files/python3lib/opf_newparser.py
+fixtimestamp() {
+  touch -r $1.orig $1
+  rm -f $1.orig
+}
+chmod a-x src/Dialogs/AddSemantics.{cpp,h} \
+          src/Form_Files/{AddSemantics,PKeyboardShortcutsWidget}.ui \
+          src/Misc/PyObjectPtr.h \
+          src/Resource_Files/dictionaries/*.{aff,dic} \
+          src/Resource_Files/main/*.png \
+          src/Resource_Files/polyfills/MathJax_README.md \
+          src/ResourceObjects/NavProcessor.{cpp,h}
+for fil in src/Misc/PyObjectPtr.h \
+           src/Resource_Files/python3lib/metadata_utils.py \
+           src/Resource_Files/python3lib/metaproc2.py \
+           src/Resource_Files/python3lib/metaproc3.py \
+           src/Resource_Files/python3lib/opf_newparser.py
+do
+  sed -i.orig 's/\r//' $fil
+  fixtimestamp $fil
+done
+for fil in $(grep -Frl %{_bindir}/env .); do
+  sed -ri.orig 's,%{_bindir}/env python3?,%{_bindir}/python3,' $fil
+  fixtimestamp $fil
+done
 
+# Fix hunspell library lookup from python
+hver=$(ls -1 %{_libdir}/libhunspell*.so | sed 's/.*hunspell\(-.*\)\.so/\1/')
+sed -i.orig "s/find_library('hunspell')/find_library('hunspell$hver')/" \
+  src/Resource_Files/plugin_launchers/python/pluginhunspell.py
+fixtimestamp src/Resource_Files/plugin_launchers/python/pluginhunspell.py
 
 %build
 mkdir build
@@ -112,14 +139,12 @@ appstream-util validate-relax --nonet \
 
 %post
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-/usr/bin/update-desktop-database &> /dev/null || :
 
 %postun
 if [ $1 -eq 0 ] ; then
     touch --no-create %{_datadir}/icons/hicolor &>/dev/null
     gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
-/usr/bin/update-desktop-database &> /dev/null || :
 
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
@@ -140,6 +165,17 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Apr 12 2017 Jerry James <loganjerry@gmail.com> - 0.9.8-1
+- New upstream release 0.9.8 (rhbz#1389961)
+- Add -pluginrunner patch to fix a small code typo
+- Drop unneeded boost and xerces-c BRs
+- Add pkgconfig BR
+- Fix more wrong executable bits and end of line encodings
+- Don't use /usr/bin/env to find python
+- Drop obsolete update-desktop-database invocations
+- Use ls and sed to insert the right hunspell version instead of patching it
+- Minor appdata updates
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
