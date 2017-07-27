@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.9.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -165,6 +165,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.8-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Wed Apr 12 2017 Jerry James <loganjerry@gmail.com> - 0.9.8-1
 - New upstream release 0.9.8 (rhbz#1389961)
 - Add -pluginrunner patch to fix a small code typo
