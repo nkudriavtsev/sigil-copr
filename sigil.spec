@@ -1,14 +1,13 @@
 Name:           sigil
-Version:        0.9.8
-Release:        3%{?dist}
+Version:        0.9.9
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
-Source0:        https://github.com/Sigil-Ebook/Sigil/releases/download/%{version}/Sigil-%{version}-Code.zip
+Source0:        https://github.com/Sigil-Ebook/Sigil/archive/%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:        %{name}.appdata.xml
 Patch1:         %{name}-0.8.0-system-dicts.patch
 Patch2:         %{name}-0.9.3-global-plugin-support.patch
-Patch3:         %{name}-0.9.8-pluginrunner.patch
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtwebkit-devel
@@ -66,10 +65,9 @@ BuildArch:      noarch
 
 
 %prep
-%setup -q -c
+%setup -q -n Sigil-%{version}
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 sed -i 's|/lib/sigil|/%{_lib}/sigil|'      \
   CMakeLists.txt src/CMakeLists.txt        \
   src/Resource_Files/bash/sigil-sh_install
@@ -165,6 +163,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Dec 23 2017 Dan Horák <dan[at]danny.cz> - 0.9.9-1
+- New upstream release 0.9.9 (#1528492)
+
 * Thu Aug 03 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.8-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
