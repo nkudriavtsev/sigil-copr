@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.9.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -163,6 +163,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.9-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Sat Dec 23 2017 Dan Horák <dan[at]danny.cz> - 0.9.9-1
 - New upstream release 0.9.9 (#1528492)
 
