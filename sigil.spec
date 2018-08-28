@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.9.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -17,7 +17,7 @@ BuildRequires:  qt5-qtxmlpatterns-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
-BuildRequires:  minizip-devel
+BuildRequires:  minizip-compat-devel
 BuildRequires:  pkgconfig
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
@@ -163,6 +163,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Aug 28 2018 Patrik Novotný <panovotn@redhat.com> - 0.9.10-2
+- change requires to minizip-compat(-devel), rhbz#1609830, rhbz#1615381
+
 * Tue Jul 31 2018 Dan Horák <dan[at]danny.cz> - 0.9.10-1
 - New upstream release 0.9.10 (#1608388)
 
