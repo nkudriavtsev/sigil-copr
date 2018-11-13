@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.9.10
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -163,6 +163,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Nov 13 2018 Caolán McNamara <caolanm@redhat.com> - 0.9.10-3
+- rebuild for hunspell 1.7.0
+
 * Tue Aug 28 2018 Patrik Novotný <panovotn@redhat.com> - 0.9.10-2
 - change requires to minizip-compat(-devel), rhbz#1609830, rhbz#1615381
 
