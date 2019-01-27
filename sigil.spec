@@ -134,20 +134,6 @@ install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/appdata
 appstream-util validate-relax --nonet \
   $RPM_BUILD_ROOT%{_datadir}/appdata/%{name}.appdata.xml
 
-
-%post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
-
 %files
 %doc ChangeLog.txt README.md
 %license COPYING.txt
