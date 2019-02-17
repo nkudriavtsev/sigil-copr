@@ -1,6 +1,6 @@
 Name:           sigil
-Version:        0.9.10
-Release:        4%{?dist}
+Version:        0.9.11
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -17,7 +17,11 @@ BuildRequires:  qt5-qtxmlpatterns-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
+%if 0%{?fedora} >= 30
 BuildRequires:  minizip-compat-devel
+%else
+BuildRequires:  minizip-devel
+%endif
 BuildRequires:  pkgconfig
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
@@ -149,6 +153,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Sun Feb 17 2019 Dan Horák <dan[at]danny.cz> - 0.9.11-1
+- New upstream release 0.9.11 (#1677953)
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.10-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
