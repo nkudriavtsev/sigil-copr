@@ -1,5 +1,5 @@
 Name:           sigil
-Version:        0.9.11
+Version:        0.9.12
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
@@ -153,6 +153,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Tue Feb 19 2019 Dan Horák <dan[at]danny.cz> - 0.9.12-1
+- New upstream release 0.9.12 (#1678503)
+
 * Sun Feb 17 2019 Dan Horák <dan[at]danny.cz> - 0.9.11-1
 - New upstream release 0.9.11 (#1677953)
 
