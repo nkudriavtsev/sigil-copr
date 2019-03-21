@@ -1,5 +1,5 @@
 Name:           sigil
-Version:        0.9.12
+Version:        0.9.13
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
@@ -107,6 +107,7 @@ sed -i.orig "s/find_library('hunspell')/find_library('hunspell$hver')/" \
   src/Resource_Files/plugin_launchers/python/pluginhunspell.py
 fixtimestamp src/Resource_Files/plugin_launchers/python/pluginhunspell.py
 
+
 %build
 mkdir build
 pushd build
@@ -138,6 +139,7 @@ install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/appdata
 appstream-util validate-relax --nonet \
   $RPM_BUILD_ROOT%{_datadir}/appdata/%{name}.appdata.xml
 
+
 %files
 %doc ChangeLog.txt README.md
 %license COPYING.txt
@@ -153,6 +155,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Thu Mar 21 2019 Dan Horák <dan[at]danny.cz> - 0.9.13-1
+- New upstream release 0.9.13 (#1690914)
+
 * Tue Feb 19 2019 Dan Horák <dan[at]danny.cz> - 0.9.12-1
 - New upstream release 0.9.12 (#1678503)
 
