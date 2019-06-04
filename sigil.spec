@@ -1,6 +1,6 @@
 Name:           sigil
 Version:        0.9.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -8,6 +8,9 @@ Source0:        https://github.com/Sigil-Ebook/Sigil/archive/%{version}.tar.gz#/
 Source1:        %{name}.appdata.xml
 Patch1:         %{name}-0.8.0-system-dicts.patch
 Patch2:         %{name}-0.9.3-global-plugin-support.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=1632199
+# port to minizip 2.x for F-30+
+Patch3:         %{name}-0.9.13-minizip2.patch
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtwebkit-devel
@@ -17,11 +20,7 @@ BuildRequires:  qt5-qtxmlpatterns-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
-%if 0%{?fedora} >= 30
-BuildRequires:  minizip-compat-devel
-%else
 BuildRequires:  minizip-devel
-%endif
 BuildRequires:  pkgconfig
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
@@ -72,6 +71,9 @@ BuildArch:      noarch
 %setup -q -n Sigil-%{version}
 %patch1 -p1
 %patch2 -p1
+%if 0%{?fedora} >= 30
+%patch3 -p1 -b .mz
+%endif
 sed -i 's|/lib/sigil|/%{_lib}/sigil|'      \
   CMakeLists.txt src/CMakeLists.txt        \
   src/Resource_Files/bash/sigil-sh_install
@@ -155,6 +157,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Tue Jun 04 2019 Dan Horák <dan[at]danny.cz> - 0.9.13-2
+- switch to minizip2 on F-30+ (#1632199)
+
 * Thu Mar 21 2019 Dan Horák <dan[at]danny.cz> - 0.9.13-1
 - New upstream release 0.9.13 (#1690914)
 
