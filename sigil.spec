@@ -1,6 +1,6 @@
 Name:           sigil
-Version:        0.9.13
-Release:        2%{?dist}
+Version:        0.9.14
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -157,6 +157,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Wed Jun 12 2019 Dan Horák <dan[at]danny.cz> - 0.9.14-1
+- New upstream release 0.9.14 (#1719405)
+
 * Tue Jun 04 2019 Dan Horák <dan[at]danny.cz> - 0.9.13-2
 - switch to minizip2 on F-30+ (#1632199)
 
