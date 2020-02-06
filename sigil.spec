@@ -1,6 +1,6 @@
 Name:           sigil
-Version:        0.9.14
-Release:        4%{?dist}
+Version:        1.0.0
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -157,6 +157,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Thu Feb 06 2020 Nicholas Kudriavtsev - 1.0.0-1
+- New upstream release 1.0.0
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.14-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
