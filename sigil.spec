@@ -1,5 +1,5 @@
 Name:           sigil
-Version:        1.2.0
+Version:        1.3.0
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
@@ -158,6 +158,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Wed Jul 29 2020 Nicholas Kudriavtsev - 1.3.0-1
+- New upstream release 1.3.0
+
 * Sun Mar 29 2020 Nicholas Kudriavtsev - 1.2.0-1
 - New upstream release 1.2.0
 
