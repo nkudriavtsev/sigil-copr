@@ -89,7 +89,7 @@ chmod a-x src/Dialogs/AddSemantics.{cpp,h} \
           src/Form_Files/{AddSemantics,PKeyboardShortcutsWidget}.ui \
           src/Misc/PyObjectPtr.h \
           src/Resource_Files/dictionaries/*.{aff,dic} \
-          src/Resource_Files/main/*.png \
+          src/Resource_Files/main/*.svg \
           src/Resource_Files/polyfills/MathJax_README.md \
           src/ResourceObjects/NavProcessor.{cpp,h}
 for fil in src/Misc/PyObjectPtr.h \
@@ -161,6 +161,7 @@ appstream-util validate-relax --nonet \
 
 %changelog
 * Fri Nov 13 2020 Nicholas Kudriavtsev - 1.4.0-1
+- Convert all png icons to svg icons
 
 * Sun Oct 04 2020 Nicholas Kudriavtsev - 1.3.0-2
 - Use __cmake_in_source_build
