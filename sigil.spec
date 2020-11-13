@@ -158,6 +158,7 @@ appstream-util validate-relax --nonet \
 %{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 %files doc
 %doc docs/*.epub
