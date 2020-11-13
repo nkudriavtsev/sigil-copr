@@ -1,8 +1,8 @@
 %global __cmake_in_source_build 1
 
 Name:           sigil
-Version:        1.3.0
-Release:        2%{?dist}
+Version:        1.4.0
+Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
@@ -160,6 +160,8 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Fri Nov 13 2020 Nicholas Kudriavtsev - 1.4.0-1
+
 * Sun Oct 04 2020 Nicholas Kudriavtsev - 1.3.0-2
 - Use __cmake_in_source_build
 
