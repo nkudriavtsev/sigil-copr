@@ -136,9 +136,13 @@ desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
 rm $RPM_BUILD_ROOT%{_datadir}/pixmaps/%{name}.png
 for i in 16 32 48 128 256 512; do
   mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${i}x${i}/apps
-  install -p -m 644 src/Resource_Files/icon/app_icon_$i.png \
+  install -p -m 644 src/Resource_Files/icon/app_icons_orig/app_icon_$i.png \
     $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/${i}x${i}/apps/%{name}.png
 done
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps
+install -p -m 644 src/Resource_Files/icon/app_icons_orig/app_icon_scalable.svg \
+  $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
+
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/appdata
 install -p -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/appdata
 appstream-util validate-relax --nonet \
@@ -162,6 +166,7 @@ appstream-util validate-relax --nonet \
 %changelog
 * Fri Nov 13 2020 Nicholas Kudriavtsev - 1.4.0-1
 - Convert all png icons to svg icons
+- New path for application icons and addition of scalable icon
 
 * Sun Oct 04 2020 Nicholas Kudriavtsev - 1.3.0-2
 - Use __cmake_in_source_build
