@@ -1,7 +1,7 @@
 %global __cmake_in_source_build 1
 
 Name:           sigil
-Version:        1.4.0
+Version:        1.4.1
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
@@ -165,6 +165,8 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Tue Nov 16 2020 Nicholas Kudriavtsev - 1.4.1-1
+
 * Fri Nov 13 2020 Nicholas Kudriavtsev - 1.4.0-1
 - Convert all png icons to svg icons
 - New path for application icons and addition of scalable icon
