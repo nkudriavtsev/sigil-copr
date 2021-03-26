@@ -174,7 +174,7 @@ appstream-util validate-relax --nonet \
 * Sat Nov 21 2020 Nicholas Kudriavtsev - 1.4.2-1
 - New upstream release 1.4.2
 
-* Tue Nov 16 2020 Nicholas Kudriavtsev - 1.4.1-1
+* Mon Nov 16 2020 Nicholas Kudriavtsev - 1.4.1-1
 - New upstream release 1.4.1
 
 * Fri Nov 13 2020 Nicholas Kudriavtsev - 1.4.0-1
