@@ -87,13 +87,11 @@ fixtimestamp() {
 }
 chmod a-x src/Dialogs/AddSemantics.{cpp,h} \
           src/Form_Files/{AddSemantics,PKeyboardShortcutsWidget}.ui \
-          src/Misc/PyObjectPtr.h \
           src/Resource_Files/dictionaries/*.{aff,dic} \
           src/Resource_Files/main/*.svg \
           src/Resource_Files/polyfills/MathJax_README.md \
           src/ResourceObjects/NavProcessor.{cpp,h}
-for fil in src/Misc/PyObjectPtr.h \
-           src/Resource_Files/python3lib/metadata_utils.py \
+for fil in src/Resource_Files/python3lib/metadata_utils.py \
            src/Resource_Files/python3lib/metaproc2.py \
            src/Resource_Files/python3lib/metaproc3.py \
            src/Resource_Files/python3lib/opf_newparser.py
