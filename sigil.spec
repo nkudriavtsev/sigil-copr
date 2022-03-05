@@ -23,7 +23,7 @@ BuildRequires:  qt5-qtwebengine-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
-BuildRequires:  minizip-devel
+# BuildRequires:  minizip-devel
 BuildRequires:  pkgconfig
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
@@ -75,7 +75,7 @@ BuildArch:      noarch
 %patch1 -p1
 %patch2 -p1
 %if 0%{?fedora} >= 30
-%patch3 -p1 -b .mz
+# %%patch3 -p1 -b .mz
 %endif
 sed -i 's|/lib/sigil|/%{_lib}/sigil|'      \
   CMakeLists.txt src/CMakeLists.txt        \
