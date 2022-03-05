@@ -169,7 +169,7 @@ appstream-util validate-relax --nonet \
 * Thu Jul 22 2021 Nicholas Kudriavtsev - 1.7.0-1
 - New upstream release 1.7.0
 
-* Sat May 28 2021 Nicholas Kudriavtsev - 1.6.0-1
+* Fri May 28 2021 Nicholas Kudriavtsev - 1.6.0-1
 - New upstream release 1.6.0
 
 * Fri Mar 26 2021 Nicholas Kudriavtsev - 1.5.1-1
