@@ -23,6 +23,7 @@ BuildRequires:  qt5-qtwebengine-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
+BuildRequires:  pcre2-utf16
 BuildRequires:  minizip-devel
 BuildRequires:  pkgconfig
 BuildRequires:  python3-devel
