@@ -12,7 +12,7 @@ Patch1:         %{name}-0.8.0-system-dicts.patch
 Patch2:         %{name}-0.9.3-global-plugin-support.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1632199
 # port to minizip 2.x for F-30+
-Patch3:         %%{name}-1.3.0-minizip2.patch
+Patch3:         %{name}-1.3.0-minizip2.patch
 BuildRequires:  cmake
 BuildRequires:  qt5-qtbase-devel
 BuildRequires:  qt5-qtwebkit-devel
