@@ -1,5 +1,5 @@
 diff --git a/src/Exporters/ExportEPUB.cpp b/src/Exporters/ExportEPUB.cpp
-index a93ea270..5e1f65b3 100644
+index 1ff1055d1..00d1d86eb 100644
 --- a/src/Exporters/ExportEPUB.cpp
 +++ b/src/Exporters/ExportEPUB.cpp
 @@ -25,9 +25,11 @@
@@ -17,12 +17,11 @@ index a93ea270..5e1f65b3 100644
 @@ -145,7 +147,7 @@ void ExportEPUB::SaveFolderAsEpubToLocation(const QString &fullfolderpath, const
      fileInfo.tmz_date.tm_year = timeNow.date().year();
  
-     // Write the mimetype. This must be uncompressed and the first entry in the archive.
+      // Write the mimetype. This must be uncompressed and the first entry in the archive.
 -    if (zipOpenNewFileInZip64(zfile, "mimetype", &fileInfo, NULL, 0, NULL, 0, NULL, Z_NO_COMPRESSION, 0, 0) != ZIP_OK) {
 +    if (zipOpenNewFileInZip4_64(zfile, "mimetype", &fileInfo, NULL, 0, NULL, 0, NULL, Z_NO_COMPRESSION, 8, 0, 15, 8, Z_DEFAULT_STRATEGY, NULL, 0, 0x0b00, 1<<11, 0) != ZIP_OK) {
          zipClose(zfile, NULL);
          QFile::remove(tempFile);
-         throw(CannotStoreFile("mimetype"));
 diff --git a/src/Importers/ImportEPUB.cpp b/src/Importers/ImportEPUB.cpp
 index a7718332..9d8fc01d 100644
 --- a/src/Importers/ImportEPUB.cpp
