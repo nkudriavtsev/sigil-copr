@@ -14,7 +14,7 @@ index a93ea270..5e1f65b3 100644
  #ifdef _WIN32
  #include <iowin32.h>
  #endif
-@@ -142,7 +144,7 @@ void ExportEPUB::SaveFolderAsEpubToLocation(const QString &fullfolderpath, const
+@@ -145,7 +147,7 @@ void ExportEPUB::SaveFolderAsEpubToLocation(const QString &fullfolderpath, const
      fileInfo.tmz_date.tm_year = timeNow.date().year();
  
      // Write the mimetype. This must be uncompressed and the first entry in the archive.
