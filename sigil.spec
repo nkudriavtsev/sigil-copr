@@ -1,7 +1,7 @@
 %global __cmake_in_source_build 1
 
 Name:           sigil
-Version:        1.9.1
+Version:        1.9.2
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
@@ -164,6 +164,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Mon May 09 2022 Nicholas Kudriavtsev - 1.9.2-1
+- New upstream release 1.9.2
+
 * Fri Mar 04 2022 Nicholas Kudriavtsev - 1.9.1-1
 - New upstream release 1.9.1
 
