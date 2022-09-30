@@ -29,6 +29,7 @@ BuildRequires:  pkgconfig
 BuildRequires:  python3.10-devel
 BuildRequires:  desktop-file-utils libappstream-glib
 # For the plugins
+Requires:       python3.10
 Requires:       python3-pillow python3-cssselect python3-cssutils
 Requires:       python3-html5lib python3-lxml python3-qt5
 Requires:       python3-regex python3-chardet python3-six
