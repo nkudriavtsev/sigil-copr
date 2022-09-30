@@ -26,7 +26,7 @@ BuildRequires:  pcre-devel >= 8.31
 BuildRequires:  pcre2-devel
 BuildRequires:  minizip-devel
 BuildRequires:  pkgconfig
-BuildRequires:  python3-devel
+BuildRequires:  python3.10-devel
 BuildRequires:  desktop-file-utils libappstream-glib
 # For the plugins
 Requires:       python3-pillow python3-cssselect python3-cssutils
