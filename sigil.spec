@@ -1,7 +1,7 @@
 %global __cmake_in_source_build 1
 
 Name:           sigil
-Version:        1.9.30
+Version:        2.0.0
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
@@ -14,12 +14,12 @@ Patch2:         %{name}-0.9.3-global-plugin-support.patch
 # port to minizip 2.x for F-30+
 Patch3:         %{name}-1.9.2-minizip2.patch
 BuildRequires:  cmake
-BuildRequires:  qt5-qtbase-devel
-BuildRequires:  qt5-qtwebkit-devel
-BuildRequires:  qt5-qtsvg-devel
-BuildRequires:  qt5-qttools-devel
-BuildRequires:  qt5-qtxmlpatterns-devel
-BuildRequires:  qt5-qtwebengine-devel
+BuildRequires:  qt6-qtbase-devel
+BuildRequires:  qt6-qtwebkit-devel
+BuildRequires:  qt6-qtsvg-devel
+BuildRequires:  qt6-qttools-devel
+BuildRequires:  qt6-qtxmlpatterns-devel
+BuildRequires:  qt6-qtwebengine-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
@@ -165,6 +165,9 @@ appstream-util validate-relax --nonet \
 
 
 %changelog
+* Sun Aug 20 2023 Nicholas Kudriavtsev - 2.0.0-1
+- New upstream release 2.0.0
+
 * Mon Mar 27 2023 Nicholas Kudriavtsev - 1.9.30-1
 - New upstream release 1.9.30
 
