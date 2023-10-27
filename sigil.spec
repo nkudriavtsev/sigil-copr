@@ -116,7 +116,7 @@ fixtimestamp src/Resource_Files/plugin_launchers/python/pluginhunspell.py
 %build
 mkdir build
 pushd build
-%{cmake} --no-warn-unused-cli -DUSE_SYSTEM_LIBS=1 -DSYSTEM_LIBS_REQUIRED=1 \
+%{cmake} --no-warn-unused-cli -DUSE_SYSTEM_LIBS=1 -DSYSTEM_LIBS_REQUIRED=1 -DUSE_QT5=1 \
   -DINSTALL_BUNDLED_DICTS=0 -DSHARE_INSTALL_PREFIX:PATH=%{_prefix} ..
 make %{?_smp_mflags}
 popd
@@ -167,6 +167,7 @@ appstream-util validate-relax --nonet \
 %changelog
 * Fri Oct 27 2023 Nicholas Kudriavtsev - 2.0.2-1
 - New upstream release 2.0.2
+- Force useing Qt5
 
 * Wed Aug 23 2023 Nicholas Kudriavtsev - 2.0.1-1
 - New upstream release 2.0.1
