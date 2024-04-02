@@ -165,6 +165,7 @@ appstream-util validate-relax --nonet \
 %changelog
 * Tue Apr 02 2024 Nicholas Kudriavtsev - 2.1.0-1
 - New upstream release 2.1.0
+- Build with Qt6
 
 * Fri Oct 27 2023 Nicholas Kudriavtsev - 2.0.2-1
 - New upstream release 2.0.2
