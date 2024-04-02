@@ -170,7 +170,7 @@ appstream-util validate-relax --nonet \
 
 * Fri Oct 27 2023 Nicholas Kudriavtsev - 2.0.2-1
 - New upstream release 2.0.2
-- Force useing Qt5
+- Force using Qt5
 
 * Wed Aug 23 2023 Nicholas Kudriavtsev - 2.0.1-1
 - New upstream release 2.0.1
