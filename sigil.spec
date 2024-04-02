@@ -14,12 +14,10 @@ Patch2:         %{name}-0.9.3-global-plugin-support.patch
 # port to minizip 2.x for F-30+
 Patch3:         %{name}-1.9.2-minizip2.patch
 BuildRequires:  cmake
-BuildRequires:  qt5-qtbase-devel
-BuildRequires:  qt5-qtwebkit-devel
-BuildRequires:  qt5-qtsvg-devel
-BuildRequires:  qt5-qttools-devel
-BuildRequires:  qt5-qtxmlpatterns-devel
-BuildRequires:  qt5-qtwebengine-devel
+BuildRequires:  qt6-qt5compat-devel
+BuildRequires:  qt6-qtsvg-devel
+BuildRequires:  qt6-qttools-devel
+BuildRequires:  qt6-qtwebengine-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
 BuildRequires:  pcre-devel >= 8.31
@@ -116,7 +114,7 @@ fixtimestamp src/Resource_Files/plugin_launchers/python/pluginhunspell.py
 %build
 mkdir build
 pushd build
-%{cmake} --no-warn-unused-cli -DUSE_SYSTEM_LIBS=1 -DSYSTEM_LIBS_REQUIRED=1 -DUSE_QT5=1 \
+%{cmake} --no-warn-unused-cli -DUSE_SYSTEM_LIBS=1 -DSYSTEM_LIBS_REQUIRED=1 \
   -DINSTALL_BUNDLED_DICTS=0 -DSHARE_INSTALL_PREFIX:PATH=%{_prefix} ..
 make %{?_smp_mflags}
 popd
