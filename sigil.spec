@@ -72,10 +72,10 @@ BuildArch:      noarch
 
 %prep
 %setup -q -n Sigil-%{version}
-%patch 1 -p1
-%patch 2 -p1
+%patch -P 1 -p1
+%patch -P 2 -p1
 %if 0%{?fedora} >= 30
-%patch3 -p1 -b .mz
+%patch -P 3 -p1 -b .mz
 %endif
 sed -i 's|/lib/sigil|/%{_lib}/sigil|'      \
   CMakeLists.txt src/CMakeLists.txt        \
