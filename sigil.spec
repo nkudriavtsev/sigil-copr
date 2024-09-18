@@ -2,7 +2,7 @@
 
 Name:           sigil
 Version:        2.3.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
 URL:            https://sigil-ebook.com/
