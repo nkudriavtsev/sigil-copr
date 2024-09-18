@@ -72,8 +72,8 @@ BuildArch:      noarch
 
 %prep
 %setup -q -n Sigil-%{version}
-%patch1 -p1
-%patch2 -p1
+%patch 1 -p1
+%patch 2 -p1
 %if 0%{?fedora} >= 30
 %patch3 -p1 -b .mz
 %endif
