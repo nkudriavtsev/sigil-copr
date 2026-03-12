@@ -117,7 +117,8 @@ mkdir build
 pushd build
 %{cmake} --no-warn-unused-cli -DUSE_SYSTEM_LIBS=1 -DSYSTEM_LIBS_REQUIRED=1 \
   -DINSTALL_BUNDLED_DICTS=0 -DSHARE_INSTALL_PREFIX:PATH=%{_prefix} ..
-make %{?_smp_mflags}
+# make %{?_smp_mflags}
+cmake --build .
 popd
 
 
