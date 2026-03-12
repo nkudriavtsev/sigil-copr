@@ -124,7 +124,7 @@ popd
 
 %install
 pushd build
-%make_install
+%cmake_install
 popd
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/%{name}/plugins
 # Make rpmlint happy
