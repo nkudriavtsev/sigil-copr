@@ -26,6 +26,7 @@ BuildRequires:  minizip-devel
 BuildRequires:  pkgconfig
 BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils libappstream-glib
+BuildRequires:  cups-devel
 # For the plugins
 Requires:       python3
 Requires:       python3-pillow python3-cssselect python3-cssutils
