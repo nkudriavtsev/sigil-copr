@@ -1,7 +1,7 @@
 %global __cmake_in_source_build 1
 
 Name:           sigil
-Version:        2.7.5
+Version:        2.7.6
 Release:        1%{?dist}
 Summary:        WYSIWYG ebook editor
 License:        GPLv3+
