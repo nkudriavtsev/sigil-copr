@@ -20,7 +20,6 @@ BuildRequires:  qt6-qttools-devel
 BuildRequires:  qt6-qtwebengine-devel
 BuildRequires:  zlib-devel
 BuildRequires:  hunspell-devel
-BuildRequires:  pcre-devel >= 8.31
 BuildRequires:  pcre2-devel
 BuildRequires:  minizip-devel
 BuildRequires:  pkgconfig
