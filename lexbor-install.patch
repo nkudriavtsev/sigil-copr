@@ -1,0 +1,27 @@
+diff --git a/src/qt6sigil.cmake b/src/qt6sigil.cmake
+index 27b467dce..dc81273d5 100644
+--- a/src/qt6sigil.cmake
++++ b/src/qt6sigil.cmake
+@@ -606,9 +606,11 @@ if( UNIX AND NOT APPLE )
+     if ( CMAKE_BUILD_TYPE STREQUAL "Debug")
+         set( HUNSPELL_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libhunspelld.so )
+         set( GUMBO_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libsigilgumbod.so )
++        set( LEXBORCSS_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/liblexborcss.so )
+     else()
+         set( HUNSPELL_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libhunspell.so )
+         set( GUMBO_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libsigilgumbo.so )
++        set( LEXBORCSS_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/liblexborcss.so )
+     endif()
+ 
+     # Standard Linux 'make install'
+@@ -629,8 +631,10 @@ if( UNIX AND NOT APPLE )
+ 
+     if( APPIMAGE_BUILD )
+         install( PROGRAMS ${GUMBO_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR} )
++        install( PROGRAMS ${LEXBORCSS_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR} )
+     else()
+         install( PROGRAMS ${GUMBO_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
++        install( PROGRAMS ${LEXBORCSS_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
+     endif()
+ 
+     if( APPIMAGE_BUILD )
