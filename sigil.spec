@@ -13,6 +13,7 @@ Patch2:         %{name}-0.9.3-global-plugin-support.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=1632199
 # port to minizip 2.x for F-30+
 Patch3:         %{name}-1.9.2-minizip2.patch
+Patch4:         lexbor-install.patch
 BuildRequires:  cmake
 BuildRequires:  qt6-qt5compat-devel
 BuildRequires:  qt6-qtsvg-devel
@@ -77,6 +78,7 @@ BuildArch:      noarch
 %if 0%{?fedora} >= 30
 %patch -P 3 -p1 -b .mz
 %endif
+%patch -P 4 -p1
 sed -i 's|/lib/sigil|/%{_lib}/sigil|'      \
   CMakeLists.txt src/CMakeLists.txt        \
   src/Resource_Files/bash/sigil-sh_install
